@@ -196,15 +196,31 @@ class ScreenTranslatorApp(QObject):
 
         lr = self.config.live_region
         if len(lr) == 4:
-            self.live_frame.set_capture_rect(QRect(lr[0], lr[1], max(200, lr[2]), max(70, lr[3])))
+            lw = min(max(200, lr[2]), geo.width() - 40)
+            lh = min(max(70, lr[3]), geo.height() - 160)
+            lx = max(geo.left() + 10, min(lr[0], geo.right() - lw - 10))
+            ly = max(geo.top() + 40, min(lr[1], geo.bottom() - lh - 10))
+            self.live_frame.set_capture_rect(QRect(lx, ly, lw, lh))
         else:
-            self.live_frame.set_capture_rect(QRect(geo.left() + 260, geo.bottom() - 320, 720, 150))
+            lw = min(720, geo.width() - 80)
+            lh = 140
+            lx = geo.left() + (geo.width() - lw) // 2
+            ly = max(geo.top() + 110, geo.bottom() - 310)
+            self.live_frame.set_capture_rect(QRect(lx, ly, lw, lh))
 
         sp = self.config.subtitle_pos
         if len(sp) == 4:
-            self.live_subtitle.setGeometry(sp[0], sp[1], max(320, sp[2]), max(95, sp[3]))
+            sw = min(max(300, sp[2]), geo.width() - 40)
+            sh = min(max(90, sp[3]), geo.height() - 120)
+            sx = max(geo.left() + 10, min(sp[0], geo.right() - sw - 10))
+            sy = max(geo.top() + 10, min(sp[1], geo.bottom() - sh - 10))
+            self.live_subtitle.setGeometry(sx, sy, sw, sh)
         else:
-            self.live_subtitle.setGeometry(geo.left() + 260, geo.bottom() - 155, 720, 130)
+            sw = min(720, geo.width() - 80)
+            sh = 125
+            sx = geo.left() + (geo.width() - sw) // 2
+            sy = max(geo.top() + 120, geo.bottom() - sh - 18)
+            self.live_subtitle.setGeometry(sx, sy, sw, sh)
 
         self.live_subtitle.apply_appearance(
             self.config.live_overlay_opacity,

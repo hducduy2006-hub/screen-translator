@@ -61,11 +61,11 @@ class AppConfig:
     gemini_api_key: str = ""
     gemini_model: str = "gemini-2.5-flash"
 
-    # Vị trí cửa sổ lưu lại
+    # Vị trí cửa sổ lưu lại (rỗng = tự động căn giữa theo kích thước màn hình thực tế)
     bar_x: int = -1
     bar_y: int = -1
-    live_region: List[int] = field(default_factory=lambda: [300, 620, 760, 180])
-    subtitle_pos: List[int] = field(default_factory=lambda: [300, 815, 760, 140])
+    live_region: List[int] = field(default_factory=list)
+    subtitle_pos: List[int] = field(default_factory=list)
 
     # Tự động sao chép bản dịch vào clipboard
     auto_copy: bool = False
