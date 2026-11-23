@@ -1,0 +1,14 @@
+[project]
+name = "screen-translator"
+version = "1.0.0"
+description = "ScreenLens Translate - Phan mem dich truc tiep tren man hinh (Anh - Viet - Trung)"
+requires-python = ">=3.12"
+dependencies = [
+    "httpx>=0.28.1",
+    "mss>=10.2.0",
+    "numpy>=2.5.5",
+    "onnxruntime>=1.32.0",
+    "pillow>=13.0.0",
+    "pyside6>=6.12.0",
+    "rapidocr>=3.10.0",
+]
